@@ -1,7 +1,11 @@
 # a6TestCollection
 A collection of JUnit tests for A6
 
-To contribute to this test collection, please put all of your tests into a package with the following name pattern:
+To contribute to this test collection, first create a "fork" of this repository by pressing the "Fork" button that should be on the top right of the repository web interface on GitHub. This will allow you to create a private copy of the repository in your GitHub account that you have write permission for.
+
+Once you have a forked copy of this repo, you can clone it into Eclipse.
+
+Please put all of your tests into a package with the following name pattern:
 ```
 a6test.onyen
 ```
@@ -12,9 +16,9 @@ Your tests should be written using JUnit 4 and assuming that the code to be test
 
 Within your test package, please put all of your tests within a class called ```A6Tests```. You may create additional helper classes within your package as necessary.
 
-Please be sure to work on your own branch named for your onyen.
+Push your code to your forked copy of the repo and then through the GitHub web interface to your forked copy request a "pull" request. 
 
-Submit your code by pushing back to GitHub on your onyen-named branch and then requesting a "pull" request. To make a pull request, log into GitHub, go to the [Fall2018COMP401-001/a6TestCollection](https://github.com/Fall2018COMP401-001/a6TestCollection) repository, switch to your branch, press the button for "Pull Request", and then on the next screen, press the "Create Pull Request" button.
+To make a pull request, log into GitHub, go to your forked copy of the repository, press the button for "Pull Request". On the next screen, you should see a way to select which branch you are making the pull request to and from on either side of a left facing arrow. Make sure the left hand side of the arrow is selecting the master branch of the base fork and the right hand side of the arrow is selecting whatever branch you pushed to on your private fork. Then press the "Create Pull Request" button.
 
 
 
