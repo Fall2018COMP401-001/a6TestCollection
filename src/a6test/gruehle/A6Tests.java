@@ -3,6 +3,8 @@ package a6test.gruehle;
 
 import org.junit.*;
 
+import static org.junit.Assert.*;
+
 import a6.*;
 
 import a6test.gruehle.ROIObserverImpl;

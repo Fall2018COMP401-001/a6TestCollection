@@ -10,7 +10,6 @@ public class ROIObserverImpl implements ROIObserver {
 		timesNotified = 0;
 	}
 	
-	
 	public void notify(ObservablePicture picture, Region changed_region) {
 		timesNotified++;
 	}
