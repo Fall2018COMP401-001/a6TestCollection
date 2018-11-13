@@ -16,6 +16,13 @@ public class A6Tests {
 		Region another;
 		
 		try {
+			another = new RegionImpl(1, 3, 5, -7);
+		}
+		catch (IllegalArgumentException e) {
+			
+		}
+		
+		try {
 			reg = new RegionImpl(5, 2, 3, 3);
 			other = new RegionImpl(1, 5, 3, 3);
 		}
@@ -23,12 +30,6 @@ public class A6Tests {
 			
 		}
 		
-		try {
-			another = new RegionImpl(1, 3, 5, -7);
-		}
-		catch (IllegalArgumentException e) {
-			
-		}
 	}
 
 }
