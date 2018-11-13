@@ -1,4 +1,4 @@
-package a6test;
+package a6test.itai;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
