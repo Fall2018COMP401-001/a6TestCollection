@@ -1,8 +1,6 @@
 package a6.a6Tests;
 
-import a6.NoIntersectionException;
-import a6.Region.Region;
-import a6.Region.RegionImpl;
+import a6.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
