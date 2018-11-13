@@ -9,6 +9,18 @@ import a6.*;
 public class A6Tests {
 
 	@Test
+	public void nullRegionUnionTest() {
+		Region a = new RegionImpl(1,1,6,5);
+		Region union = a.union(null);
+		
+		assertEquals(a.getLeft(), union.getLeft());
+		assertEquals(a.getTop(), union.getTop());
+		assertEquals(a.getRight(), union.getRight());
+		assertEquals(a.getBottom(), union.getBottom());
+		assertEquals(a, union);
+	}
+	
+	@Test
 	public void basicRegionUnionTest() {
 		Region a = new RegionImpl(0, 0, 5, 5);
 		Region b = new RegionImpl(6, 6, 10, 10);
