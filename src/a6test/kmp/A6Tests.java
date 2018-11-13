@@ -42,5 +42,28 @@ public class A6Tests {
 		assertEquals(10, union.getBottom());
 		
 	}
+	
+	@Test
+	public void testRegionConstructor() {
+		Region reg;
+		Region other;
+		Region another;
+		
+		try {
+			another = new RegionImpl(1, 3, 5, -7);
+		}
+		catch (IllegalArgumentException e) {
+			
+		}
+		
+		try {
+			reg = new RegionImpl(5, 2, 3, 3);
+			other = new RegionImpl(1, 5, 3, 3);
+		}
+		catch (IllegalArgumentException e) {
+			
+		}
+		
+	}
 
 }
