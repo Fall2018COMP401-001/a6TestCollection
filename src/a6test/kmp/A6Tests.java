@@ -18,6 +18,8 @@ public class A6Tests {
 		assertEquals(a.getRight(), union.getRight());
 		assertEquals(a.getBottom(), union.getBottom());
 		assertEquals(a, union);
+		
+		// a quick change.
 	}
 	
 	@Test
