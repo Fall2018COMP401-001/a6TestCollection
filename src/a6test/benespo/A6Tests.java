@@ -1,4 +1,4 @@
-package a6test.kmp;
+package a6test.benespo;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,8 @@ import a6.*;
 
 public class A6Tests {
 
+	
+	
 	@Test
 	public void nullRegionUnionTest() {
 		Region a = new RegionImpl(1,1,6,5);
@@ -42,5 +44,33 @@ public class A6Tests {
 		assertEquals(10, union.getBottom());
 		
 	}
+	
+	@Test
+	public void basicRegionIntersectTest() {
+		Region a = new RegionImpl(0, 0, 5, 5);
+		Region b = new RegionImpl(3, 3, 7, 7);
+		Region c = new RegionImpl(6, 6, 9, 9);
+	
+		Region intersect;
+		try {
+			intersect = a.intersect(b);
+			assertEquals(3, intersect.getLeft());
+			assertEquals(5, intersect.getRight());
+			assertEquals(5, intersect.getBottom());
+			assertEquals(3, intersect.getTop());
+		} catch (NoIntersectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		//Test no intersection 
+		try {
+			a.intersect(c);
+		} catch (NoIntersectionException e) {
+			
+		}
+			
+	}
+	
+	
 
 }
