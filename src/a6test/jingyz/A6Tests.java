@@ -114,31 +114,33 @@ public class A6Tests {
 		assertEquals(((ROIObserverImpl) o1).getCount(), 2);
 	}
 	
+	@Test
 	public void suspendResumeTest() {
 		blueMuOb.registerROIObserver(o2, d);
 		blueMuOb.suspendObservable();
-		assertEquals(((ROIObserverImpl) o1).getCount(), 0);
+		assertEquals(((ROIObserverImpl) o2).getCount(), 0);
 		blueMuOb.paint(0, 0, randomColor);
-		assertEquals(((ROIObserverImpl) o1).getCount(), 0);
+		assertEquals(((ROIObserverImpl) o2).getCount(), 0);
 		blueMuOb.paint(1, 1, randomColor);
-		assertEquals(((ROIObserverImpl) o1).getCount(), 0);
+		assertEquals(((ROIObserverImpl) o2).getCount(), 0);
 		blueMuOb.resumeObservable();
-		assertEquals(((ROIObserverImpl) o1).getCount(), 2);
+		assertEquals(((ROIObserverImpl) o2).getCount(), 1);
 	}
 	
+	@Test
 	public void registerAndUnregisterTest() {
 		greenMuOb.registerROIObserver(o3, a);
 		greenMuOb.registerROIObserver(o3, c);
 		greenMuOb.registerROIObserver(o3, d);
 		greenMuOb.registerROIObserver(o4, a);
 		greenMuOb.registerROIObserver(o4, c);
-		greenMuOb.registerROIObserver(o3, d);
+		greenMuOb.registerROIObserver(o4, d);
 		assertEquals(greenMuOb.findROIObservers(a).length, 6);
 		assertEquals(greenMuOb.findROIObservers(e).length, 2);
 		greenMuOb.unregisterROIObservers(e);
-		assertEquals(greenMuOb.findROIObservers(e).length, 4);
+		assertEquals(greenMuOb.findROIObservers(e).length, 0);
 		greenMuOb.unregisterROIObserver(o3);
-		assertEquals(greenMuOb.findROIObservers(e).length, 2);
+		assertEquals(greenMuOb.findROIObservers(a).length, 2);
 	}
 	
 	
