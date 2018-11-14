@@ -38,26 +38,6 @@ class A6Tests {
 	@Test
 	void testRegionImplConstructor() {
 		try {
-			new RegionImpl(-1, 0, 1, 2);
-			fail("Left cannot be less than 0");
-		} catch (IllegalArgumentException e) {
-		}
-		try {
-			new RegionImpl(1, -1, 1, 2);
-			fail("Top cannot be less than 0");
-		} catch (IllegalArgumentException e) {
-		}
-		try {
-			new RegionImpl(1, 0, -1, 2);
-			fail("Right cannot be less than 0");
-		} catch (IllegalArgumentException e) {
-		}
-		try {
-			new RegionImpl(1, 0, 1, -1);
-			fail("Bottom cannot be less than 0");
-		} catch (IllegalArgumentException e) {
-		}
-		try {
 			new RegionImpl(2, 1, 1, 2);
 			fail("Left cannot be greater than right");
 		} catch (IllegalArgumentException e) {
@@ -124,11 +104,12 @@ class A6Tests {
 
 		observableBlueMutable4by4.registerROIObserver(observer1, region0000);
 
-		assertEquals(4, observableBlueMutable4by4.findROIObservers(region0033).length);
+		assertEquals(5, observableBlueMutable4by4.findROIObservers(region0033).length);
 		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[0]);
 		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[1]);
 		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[2]);
 		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[3]);
+		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[4]);
 
 		observableBlueMutable4by4.unregisterROIObserver(observer1);
 
