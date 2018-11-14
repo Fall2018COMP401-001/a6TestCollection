@@ -23,7 +23,7 @@ class A6Tests {
 	
 	
 	//Observers
-	ROIObserver observer_1;
+	ROIObserver observer_1=new ROIObserverImpl();
 	
 		
 	//test RegionImpl throw correct exceptions
@@ -186,6 +186,7 @@ class A6Tests {
 		//set caption
 		mutable_observable.setCaption("new caption");
 		assertEquals("new caption", mutable_observable.getCaption());
+		
 		
 	}
 	
