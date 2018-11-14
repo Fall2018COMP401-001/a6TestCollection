@@ -20,5 +20,11 @@ Push your code to your forked copy of the repo and then through the GitHub web i
 
 To make a pull request, log into GitHub, go to your forked copy of the repository, press the button for "Pull Request". On the next screen, you should see a way to select which branch you are making the pull request to and from on either side of a left facing arrow. Make sure the left hand side of the arrow is selecting the master branch of the base fork and the right hand side of the arrow is selecting whatever branch you pushed to on your private fork. Then press the "Create Pull Request" button.
 
+A few things to watch out for:
+* If your tests rely on any other classes (like for example an implementation of ROIObserver), be sure those are located in your test package and not a6.
+* Avoid including .classpath, .profile, or .gitignore in what you submit to the pull request.
+
+
+
 
 
