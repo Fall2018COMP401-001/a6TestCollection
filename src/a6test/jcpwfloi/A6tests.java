@@ -38,13 +38,7 @@ public class A6tests {
 		} catch (RuntimeException e) {
 			fail("Fail to instantiate Region instance");
 		}
-		
-		try {
-			Region a = new RegionImpl(-1, -1, 100, 100);
-			fail("Range check error for RegionImpl");
-		} catch (RuntimeException e) {
-		}
-		
+				
 		try {
 			Region a = new RegionImpl(4, 3, 3, 3);
 			fail("left should not be greater than right");
