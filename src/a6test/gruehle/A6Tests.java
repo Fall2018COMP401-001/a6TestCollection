@@ -10,7 +10,7 @@ import a6.*;
 import a6test.gruehle.ROIObserverImpl;
 
 
-public class A6tests {
+public class A6Tests {
 
 		Pixel red = new ColorPixel(1.0, 0.0, 0.0);
 		Pixel green = new ColorPixel(0.0, 1.0, 0.0);
