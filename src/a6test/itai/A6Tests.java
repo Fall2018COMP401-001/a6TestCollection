@@ -21,6 +21,15 @@ import a6.RegionImpl;
 
 class A6Tests {
 
+	private boolean compareRegions(Region a, Region b) {
+		assertEquals(a.getTop(), b.getTop());
+		assertEquals(a.getLeft(), b.getLeft());
+		assertEquals(a.getBottom(), b.getBottom());
+		assertEquals(a.getRight(), b.getRight());
+		
+		return true;
+	}
+	
 	@Test
 	void testRegionIntersectAndUnion() {
 		//Regional Intersect
@@ -33,10 +42,10 @@ class A6Tests {
 		Region r8 = new RegionImpl(6, 6, 8, 8);
 		
 		try {
-			assertEquals((RegionImpl) r1.intersect(r2), new RegionImpl(2, 2, 5 ,5));
-			assertEquals((RegionImpl) r1.intersect(r3), new RegionImpl(1, 2, 3 ,4));
-			assertEquals((RegionImpl) r5.intersect(r6), r6);
-			assertEquals((RegionImpl) r6.intersect(r4), new RegionImpl(3, 3, 4 ,4));
+			compareRegions(r1.intersect(r2), new RegionImpl(2, 2, 5 ,5));
+			compareRegions(r1.intersect(r3), new RegionImpl(1, 2, 3 ,4));
+			compareRegions(r5.intersect(r6), r6);
+			compareRegions(r6.intersect(r4), new RegionImpl(3, 3, 4 ,4));
 		} catch (NoIntersectionException e) {
 			fail("");
 		}
@@ -48,9 +57,9 @@ class A6Tests {
 			
 		}
 		//Union
-		assertEquals((RegionImpl) r1.union(r2), new RegionImpl(0, 0, 6, 6));
-		assertEquals((RegionImpl) r5.union(r2), r5);
-		assertEquals((RegionImpl) r8.union(r6), new RegionImpl(3, 3, 8, 8));
+		compareRegions(r1.union(r2), new RegionImpl(0, 0, 6, 6));
+		compareRegions(r5.union(r2), r5);
+		compareRegions(r8.union(r6), new RegionImpl(3, 3, 8, 8));
 	}
 	@Test
 	void testROIObserver() {
