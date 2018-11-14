@@ -6,16 +6,19 @@ public class ObservablePictureImpl implements ObservablePicture {
 
 	private Picture p;
 	private List<ObserverAndRegion> observers;
-	private List<Region> region;
+	private Region region;
+	private boolean firstRegion;
 	private boolean suspended = false;
-
+	private int nCount = 0;
+	
 	public ObservablePictureImpl(Picture p) {
 		if (p == null) {
 			throw new IllegalArgumentException("picture cannot be null");
 		}
 		this.p = p;
 		observers = new ArrayList<>();
-		region = new ArrayList<>();
+		region = null;
+		firstRegion = true;
 	}
 
 	@Override
@@ -38,7 +41,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		this.p = this.p.paint(x, y, p);
 		Region r = new RegionImpl(x, y, x, y);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -50,7 +58,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		this.p = this.p.paint(x, y, p, factor);
 		Region r = new RegionImpl(x, y, x, y);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -62,7 +75,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		this.p = this.p.paint(ax, ay, bx, by, p);
 		Region r = new RegionImpl(ax, ay, bx, by);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -74,7 +92,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		this.p = this.p.paint(ax, ay, bx, by, p, factor);
 		Region r = new RegionImpl(ax, ay, bx, by);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -87,7 +110,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		int rad = (int)radius;
 		Region r = new RegionImpl(cx - rad, cy - rad, cx + rad, cy + rad);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -100,7 +128,12 @@ public class ObservablePictureImpl implements ObservablePicture {
 		int rad = (int)radius;
 		Region r = new RegionImpl(cx - rad, cy - rad, cx + rad, cy + rad);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -110,9 +143,14 @@ public class ObservablePictureImpl implements ObservablePicture {
 	@Override
 	public Picture paint(int x, int y, Picture p) {
 		this.p = this.p.paint(x, y, p);
-		Region r = new RegionImpl(x, y, p.getWidth(), p.getHeight());
+		Region r = new RegionImpl(x, y, x + p.getWidth() - 1, y + p.getHeight() - 1);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -122,9 +160,14 @@ public class ObservablePictureImpl implements ObservablePicture {
 	@Override
 	public Picture paint(int x, int y, Picture p, double factor) {
 		this.p = this.p.paint(x, y, p, factor);
-		Region r = new RegionImpl(x, y, p.getWidth(), p.getHeight());
+		Region r = new RegionImpl(x, y, x + p.getWidth() - 1, y + p.getHeight() - 1);
 		if (suspended == true) {
-			region.add(r);
+			if (firstRegion) {
+				region = r;
+				firstRegion = false;
+			}else {
+				region = region.union(r);
+			}
 		} else {
 			notify(r);
 		}
@@ -154,7 +197,7 @@ public class ObservablePictureImpl implements ObservablePicture {
 
 	@Override
 	public void unregisterROIObservers(Region r) {
-		for (ObserverAndRegion o : observers) {
+		for (ObserverAndRegion o : observers.toArray(new ObserverAndRegion[observers.size()])) {
 			if (o.getRegion() == r) {
 				observers.remove(o);
 			}
@@ -163,7 +206,7 @@ public class ObservablePictureImpl implements ObservablePicture {
 
 	@Override
 	public void unregisterROIObserver(ROIObserver observer) {
-		for (ObserverAndRegion o : observers) {
+		for (ObserverAndRegion o : observers.toArray(new ObserverAndRegion[observers.size()])) {
 			if (o.getObserver() == observer) {
 				observers.remove(o);
 			}
@@ -173,9 +216,8 @@ public class ObservablePictureImpl implements ObservablePicture {
 	@Override
 	public ROIObserver[] findROIObservers(Region r) {
 		List<ROIObserver> obs = new ArrayList<>();
-		for (ObserverAndRegion o : observers) {
+		for (ObserverAndRegion o : observers.toArray(new ObserverAndRegion[observers.size()])) {
 			if (intersect(o.getRegion(), r)) {
-				
 				obs.add(o.getObserver());
 			}
 		}
@@ -200,20 +242,26 @@ public class ObservablePictureImpl implements ObservablePicture {
 	public void resumeObservable() {
 		suspended = false;
 		if (region != null) {
-			for (Region r : region) {
-				notify(r);
-			}
+			notify(region);
 		}
-		region = new ArrayList<>();
+		region = null;
 	}
 
 	public void notify(Region changed_region) {
 		if (changed_region == null) {
 			throw new IllegalArgumentException("region cannot be null");
 		}
+		firstRegion = true;
 		ROIObserver[] OList = findROIObservers(changed_region);
 		for (ROIObserver o : OList) {
 			o.notify(this, changed_region);
+			nCount ++;
 		}
+	}
+	
+	public int getNotificationCount() {
+		int temp = nCount;
+		nCount = 0;
+		return temp;
 	}
 }

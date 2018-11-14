@@ -5,7 +5,9 @@ public class RegionImpl implements Region {
 	private int left, top, right, bottom;
 	
 	public RegionImpl(int left, int top, int right, int bottom) {
-		if (left > right || top > bottom)
+		if (left > right || top > bottom) {
+			throw new IllegalArgumentException("illegal geometry");
+		}
 		this.left = left;
 		this.right = right;
 		this.top = top;
