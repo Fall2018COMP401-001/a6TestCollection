@@ -8,6 +8,7 @@ import a6.*;
 public class A6Tests {
 
 	
+	
 	@Test
 	public void testRegionImpleConstructor() {
 
