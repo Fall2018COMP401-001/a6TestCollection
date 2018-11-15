@@ -90,54 +90,83 @@ class A6Tests {
 	@Test
 	void testSimpleROIObservableMethods() {
 		ObservablePicture observableBlueMutable4by4 = new ObservablePictureImpl(blueMutable4by4);
+		ROIObserver[] observers;
+
+		try {
+			observableBlueMutable4by4.registerROIObserver(null, region0000);
+			fail("Cannot register null observer");
+		} catch (Exception e) {
+		}
+
+		try {
+			observableBlueMutable4by4.registerROIObserver(observer1, null);
+			fail("Cannot register null region");
+		} catch (Exception e) {
+		}
+		
+		observableBlueMutable4by4.unregisterROIObserver(null);
+		observers = observableBlueMutable4by4.findROIObservers(null);
+		observableBlueMutable4by4.unregisterROIObservers(null);
 
 		observableBlueMutable4by4.registerROIObserver(observer1, region0000);
 		observableBlueMutable4by4.registerROIObserver(observer1, region3333);
 		observableBlueMutable4by4.registerROIObserver(observer2, region2122);
 		observableBlueMutable4by4.registerROIObserver(observer3, region3031);
 
-		assertEquals(4, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[1]);
-		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[2]);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[3]);
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(4, observers.length);
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer2));
+		assert (checkObservers(observers, observer3));
 
 		observableBlueMutable4by4.registerROIObserver(observer1, region0000);
 
-		assertEquals(5, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[1]);
-		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[2]);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[3]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[4]);
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(5, observers.length);
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer2));
+		assert (checkObservers(observers, observer3));
 
 		observableBlueMutable4by4.unregisterROIObserver(observer1);
 
-		assertEquals(2, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[1]);
-		
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(2, observers.length);
+		assert (checkObservers(observers, observer2));
+		assert (checkObservers(observers, observer3));
+
 		observableBlueMutable4by4.registerROIObserver(observer1, region0000);
 		observableBlueMutable4by4.registerROIObserver(observer1, region3333);
-		
-		assertEquals(4, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[1]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[2]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[3]);
-		
-		observableBlueMutable4by4.unregisterROIObservers(region3333);
-		
-		assertEquals(3, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer2, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[1]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[2]);
 
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(4, observers.length);
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer2));
+		assert (checkObservers(observers, observer3));
+
+		observableBlueMutable4by4.unregisterROIObservers(region3333);
+
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(3, observers.length);
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer2));
+		assert (checkObservers(observers, observer3));
 
 		observableBlueMutable4by4.unregisterROIObservers(region2121);
-		assertEquals(2, observableBlueMutable4by4.findROIObservers(region0033).length);
-		assertEquals(observer3, observableBlueMutable4by4.findROIObservers(region0033)[0]);
-		assertEquals(observer1, observableBlueMutable4by4.findROIObservers(region0033)[1]);
+
+		observers = observableBlueMutable4by4.findROIObservers(region0033);
+
+		assertEquals(2, observers.length);
+		assert (checkObservers(observers, observer1));
+		assert (checkObservers(observers, observer3));
 	}
 
 	@Test
@@ -158,7 +187,7 @@ class A6Tests {
 		assertEquals(0, ob2.getCount());
 		assertEquals(0, ob3.getCount());
 		assert (equalRegions(ob1.getNotifiedRegion().get(0), region0000));
-		
+
 		observableBlueMutable4by4.paint(0, 0, observableBlueImmutable3by3);
 		assertEquals(3, ob1.getCount());
 		assertEquals(1, ob2.getCount());
@@ -168,7 +197,7 @@ class A6Tests {
 		assert (equalRegions(ob1.getNotifiedRegion().get(2), region3333));
 		assert (equalRegions(ob2.getNotifiedRegion().get(0), region2122));
 		assert (equalRegions(ob3.getNotifiedRegion().get(0), region3031));
-		
+
 		observableBlueMutable4by4.paint(1, 1, red);
 		assertEquals(3, ob1.getCount());
 		assertEquals(1, ob2.getCount());
@@ -178,7 +207,7 @@ class A6Tests {
 		assert (equalRegions(ob1.getNotifiedRegion().get(2), region3333));
 		assert (equalRegions(ob2.getNotifiedRegion().get(0), region2122));
 		assert (equalRegions(ob3.getNotifiedRegion().get(0), region3031));
-		
+
 		observableBlueMutable4by4.unregisterROIObservers(region3333);
 		observableBlueMutable4by4.paint(3, 3, 2, red);
 		assertEquals(3, ob1.getCount());
@@ -205,28 +234,28 @@ class A6Tests {
 		observableBlueMutable4by4.registerROIObserver(ob1, region3333);
 		observableBlueMutable4by4.registerROIObserver(ob2, region2122);
 		observableBlueMutable4by4.registerROIObserver(ob3, region3031);
-		
+
 		observableBlueMutable4by4.suspendObservable();
-		
-		observableBlueMutable4by4.paint(0, 0, red);		
+
+		observableBlueMutable4by4.paint(0, 0, red);
 		observableBlueMutable4by4.paint(1, 1, red);
 		assertEquals(0, ob1.getCount());
 		assertEquals(0, ob2.getCount());
 		assertEquals(0, ob3.getCount());
-		
+
 		observableBlueMutable4by4.resumeObservable();
 		assertEquals(1, ob1.getCount());
 		assertEquals(0, ob2.getCount());
 		assertEquals(0, ob3.getCount());
 		assert (equalRegions(ob1.getNotifiedRegion().get(0), region0000));
-		
+
 		observableBlueMutable4by4.suspendObservable();
 		observableBlueMutable4by4.suspendObservable();
-		
+
 		observableBlueMutable4by4.paint(0, 0, red);
 		observableBlueMutable4by4.paint(2, 0, red);
 		observableBlueMutable4by4.paint(0, 3, red);
-		
+
 		observableBlueMutable4by4.resumeObservable();
 		assertEquals(2, ob1.getCount());
 		assertEquals(1, ob2.getCount());
@@ -234,7 +263,7 @@ class A6Tests {
 		assert (equalRegions(ob1.getNotifiedRegion().get(0), region0000));
 		assert (equalRegions(ob1.getNotifiedRegion().get(1), region0000));
 		assert (equalRegions(ob2.getNotifiedRegion().get(0), region2122));
-		
+
 		observableBlueMutable4by4.resumeObservable();
 		assertEquals(2, ob1.getCount());
 		assertEquals(1, ob2.getCount());
@@ -249,8 +278,13 @@ class A6Tests {
 				&& r1.getRight() == r2.getRight());
 	}
 
-	private static boolean equalPixels(Pixel p1, Pixel p2) {
-		return (p1.getRed() == p2.getRed() && p2.getGreen() == p2.getGreen() && p1.getBlue() == p2.getBlue());
+	private static boolean checkObservers(ROIObserver[] observers, ROIObserver observer) {
+		for (int i = 0; i < observers.length; i++) {
+			if (observers[i] == observer) {
+				observers[i] = null;
+				return true;
+			}
+		}
+		return false;
 	}
-
 }
