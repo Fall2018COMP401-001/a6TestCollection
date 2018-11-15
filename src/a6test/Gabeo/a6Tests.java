@@ -9,7 +9,7 @@ import a6.Region;
 import a6.RegionImpl;
 
 public class a6Tests {
-
+ // int test
 	@Test
 	public void testMyIntersect() {
 		Region one = new RegionImpl(1, 1, 4, 4);
@@ -35,4 +35,4 @@ public class a6Tests {
 		catch(NoIntersectionException e) {
 		}
 	}
-}
+} 
