@@ -122,7 +122,8 @@ public class A6Test{
 		
 		op1.paint(5, 5, blue);
 		
-		assertEquals(3, ((ObservablePictureImpl) op1).getNotificationCount());
+		assertEquals(3, ((ObservablePictureImpl) op1).getNotifyCount());
+		op1.clearNotifications;
 		
 		op1.unregisterROIObservers(a);
 		
@@ -132,11 +133,13 @@ public class A6Test{
 		op1.registerROIObserver(o2, a);
 		op1.registerROIObserver(o1, b);
 		
-		assertEquals(1, ((ObservablePictureImpl) op1).getNotificationCount());
+		assertEquals(1, ((ObservablePictureImpl) op1).getNotifyCount());
+		op1.clearNotifications();
 		
 		op1.paint(5, 5, blue);
 		
-		assertEquals(4, ((ObservablePictureImpl) op1).getNotificationCount());
+		assertEquals(4, ((ObservablePictureImpl) op1).getNotifyCount());
+		op1.clearNotifications();
 		
 		op1.suspendObservable();
 		
@@ -146,14 +149,15 @@ public class A6Test{
 		
 		op1.resumeObservable();
 		
-		assertEquals(4, ((ObservablePictureImpl) op1).getNotificationCount());
+		assertEquals(4, ((ObservablePictureImpl) op1).getNotifyCount());
+		op1.clearNotifications();
 		
 		op1.suspendObservable();
 		op1.paint(0, 0, p2);
 		op1.paint(4, 4, p2);
 		op1.resumeObservable();
 		
-		assertEquals(4, ((ObservablePictureImpl) op1).getNotificationCount());
+		assertEquals(4, ((ObservablePictureImpl) op1).getNotifyCount());
 	}
 	
 }
