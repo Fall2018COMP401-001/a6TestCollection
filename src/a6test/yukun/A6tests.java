@@ -2,7 +2,7 @@ package a6test.yukun;
 
 import static org.junit.Assert.*;
 import a6.*;
-
+import a6test.yukun.ROIObserverImpl;
 import org.junit.Test;
 
 public class A6tests {
