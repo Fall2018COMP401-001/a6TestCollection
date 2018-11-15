@@ -1,11 +1,9 @@
 package a6.a6Tests;
+import a6.*
 
-import a6.NoIntersectionException;
-import a6.Region.Region;
-import a6.Region.RegionImpl;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
+import org.testng.annotations.Test;
 
 class a6NoviceTests {
 
