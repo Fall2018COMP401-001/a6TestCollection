@@ -1,5 +1,5 @@
 package a6.a6Tests;
-import a6.*
+import a6.*;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
