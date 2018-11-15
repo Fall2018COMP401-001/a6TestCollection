@@ -27,12 +27,8 @@ public class A6Tests {
 			
 		}
 		
-		try {
-			another = new RegionImpl(1, 3, 5, -7);
-		}
-		catch (IllegalArgumentException e) {
-			
-		}
+		another = new RegionImpl(1, 3, 5, -7);
+		assertEquals(-7, another.getBottom());
 	}
 	
 	/*@Test
