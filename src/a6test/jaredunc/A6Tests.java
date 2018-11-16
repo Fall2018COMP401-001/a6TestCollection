@@ -6,30 +6,42 @@ package a6test.jaredunc;
 public class A6Tests {
 	
 	public void Intersectiontestbasic() throws NoIntersectionException {
-		Region a = new RegionImpl(1, 1, 5, 6);
-		Region b = new RegionImpl(0, 0, 10, 10);
+		Region first = new RegionImpl(1, 1, 5, 6);
+		Region second = new RegionImpl(0, 0, 10, 10);
 
-		Region c = b.intersect(a);
+		Region third = first.intersect(second);
 
-		assertEquals(1, a.getLeft());
-		assertEquals(1, a.getTop());
-		assertEquals(5, a.getRight());
-		assertEquals(6, a.getBottom());
+		assertEquals(1, third.getLeft());
+		assertEquals(1, third.getTop());
+		assertEquals(5, third.getRight());
+		assertEquals(6, third.getBottom());
 
 
 	}
 	
-	public void Intersectiontestbasic() {
+	public void uniontestbasic() {
 		
-		Region a = new RegionImpl(1, 1, 5, 6);
-		Region b = new RegionImpl(0, 0, 2, 2);
+		Region first = new RegionImpl(1, 1, 5, 6);
+		Region second = new RegionImpl(0, 0, 2, 2);
 		
-		Region c = b.union(a);
+		Region third = first.union(second);
 		
-		assertEquals(0, a.getLeft());
-		assertEquals(0, a.getTop());
-		assertEquals(5, a.getRight());
-		assertEquals(6, a.getBottom());
+		assertEquals(0, third.getLeft());
+		assertEquals(0, third.getTop());
+		assertEquals(5, third.getRight());
+		assertEquals(6, third.getBottom());
 		
+	}
+	
+	public void throwerrorintersection() throws NoIntersectionException {
+		Region first = new RegionImpl(1, 1, 5, 6);
+		Region second = new RegionImpl(0, 0, 0, 0);
+		
+		try {
+			Region third = first.union(second);
+			
+		} catch (NoIntersectionException badness) {
+			
+		}
 	}
 }
