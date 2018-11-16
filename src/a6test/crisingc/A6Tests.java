@@ -1,12 +1,10 @@
 package a6test.crisingc;
-//asdf
+//small change
 import static org.junit.Assert.*;
 
 import a6.*;
 
 import org.junit.Test;
-
-
 
 public class A6Tests {
 

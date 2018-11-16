@@ -1,6 +1,6 @@
 package a6test.crisingc;
 // small chang
-
+import a6.*;
 
 public class ROIObserverImpl implements ROIObserver {
 	String caption;
