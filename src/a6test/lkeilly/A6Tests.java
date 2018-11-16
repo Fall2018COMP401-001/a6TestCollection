@@ -2,9 +2,9 @@ package a6test.lkeilly;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 import org.junit.Test;
 import a6.*;
 
