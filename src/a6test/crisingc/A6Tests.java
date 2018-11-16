@@ -1,5 +1,5 @@
 package a6test.crisingc;
-
+//asdf
 import static org.junit.Assert.*;
 
 import a6.*;
@@ -36,6 +36,7 @@ public class A6Tests {
 
 	}
 	
+	@Test
 	public void testUnregisterObserver() {
 		ColorPixel red = new ColorPixel(1, 0, 0);
 		

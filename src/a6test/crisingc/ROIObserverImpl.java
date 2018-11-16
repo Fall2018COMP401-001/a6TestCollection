@@ -1,5 +1,7 @@
 package a6test.crisingc;
-// small change
+// small chang
+
+
 public class ROIObserverImpl implements ROIObserver {
 	String caption;
 	
@@ -9,7 +11,7 @@ public class ROIObserverImpl implements ROIObserver {
 	
 	@Override
 	public void notify(ObservablePicture picture, Region changed_region) {
-		System.out.println("i am notified");
+//		System.out.println("i am notified");
 
 	}
 
