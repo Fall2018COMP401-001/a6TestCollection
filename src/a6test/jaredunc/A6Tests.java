@@ -2,7 +2,6 @@ package a6test.jaredunc;
 
 
 
-
 public class A6Tests {
 	
 	public void Intersectiontestbasic() throws NoIntersectionException {
@@ -44,4 +43,66 @@ public class A6Tests {
 			
 		}
 	}
+	
+	public void registerobservers() throws NoIntersectionException {
+		
+		Region a = new RegionImpl(0,1,0,1);
+		Region s = a.union(a);
+		Region b = new RegionImpl(0,0,4,4);
+		Region c = new RegionImpl(4,4,5,6);
+		Region d = new RegionImpl(0,0,3,3);
+		Region e = new RegionImpl(8,8,8,9);
+		Region f = new RegionImpl(0,0,3,3);
+		ROIObserver w = new ROIObserverI();
+		ROIObserver x = new ROIObserverI();
+		ROIObserver y = new ROIObserverI();
+		ROIObserver z = new ROIObserverI();
+
+		
+		
+		Pixel[][] pixels = new Pixel[10][10];
+		
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels.length; j++) {
+				pixels[i][j] = new ColorPixel(Math.random(), Math.random(), Math.random());
+			}
+		}
+		
+		Picture picture = new ImmutablePixelArrayPicture(pixels, "Array");
+		
+		Pixel[][] pixels2 = new Pixel[10][10];
+		
+		for (int i = 0; i < pixels2.length; i++) {
+			for (int j = 0; j < pixels2.length; j++) {
+				pixels[i][j] = new ColorPixel(Math.random(), Math.random(), Math.random());
+			}
+		}
+		
+		
+		ObservablePicture O = new ObservablePictureImpl(picture);
+		
+		O.registerROIObserver(w,a);
+		O.registerROIObserver(x,a);
+		O.registerROIObserver(y,c);
+		O.registerROIObserver(z,e);
+		O.registerROIObserver(w,d);
+		O.registerROIObserver(x,f);
+		O.registerROIObserver(y,e);
+		O.registerROIObserver(z,a);
+		
+		int number = 0;
+		ROIObserver[] listy = O.findROIObservers(new RegionImpl(0,0,10,10));
+		assertEquals(8, listy.length);
+		
+		O.unregisterROIObserver(a);
+		ROIObserver[] listy2 = O.findROIObservers(new RegionImpl(0,0,10,10));
+		assertEquals(6, listy2.length);
+		
+		O.unregisterRegion(new RegionImpl(0,0,10,10));
+		ROIObserver[] listy3 = O.findROIObservers(new RegionImpl(0,0,10,10));
+		assertEquals(0, listy3.length);
+		
+	}
+	
+	
 }
