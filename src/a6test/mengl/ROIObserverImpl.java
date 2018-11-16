@@ -8,6 +8,6 @@ public class ROIObserverImpl implements ROIObserver {
 
 	@Override
 	public void notify(ObservablePicture picture, Region changed_region) {
-		System.out.print("Region Change");
+		System.out.println("Region Change");
 	}
 }
