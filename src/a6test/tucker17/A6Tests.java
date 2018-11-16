@@ -11,8 +11,8 @@ import a6.ObservablePictureImpl;
 import a6.Picture;
 import a6.Pixel;
 import a6.ROIObserver;
-import a6.ROIObserverImpl;
 import a6.RegionImpl;
+import a6.ROIObserverImpl;
 
 public class A6Tests {
 	Pixel blue = new ColorPixel(0, 0, 1);
