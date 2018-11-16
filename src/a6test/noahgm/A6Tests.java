@@ -16,7 +16,7 @@ import a6.RegionImpl;
 public class A6Tests {
 
 	@Test
-	public void noahsReallyGoodBasicRegionIntersectTest() throws NoIntersectionException {
+	public void noahsReallyGoodBasicIntersectTest() throws NoIntersectionException {
 		Region a = new RegionImpl(0, 0, 5, 5);
 		Region b = new RegionImpl(4, 4, 10, 10);
 		
@@ -27,8 +27,7 @@ public class A6Tests {
 		assertEquals(5, intersect.getRight());
 		assertEquals(5, intersect.getBottom());
 		
-		// Try the other way also.
-		
+// 		Checks the flipped version of intersection
 		intersect = b.intersect(a);
 		
 		assertEquals(4, intersect.getLeft());
