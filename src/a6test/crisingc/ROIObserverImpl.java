@@ -1,5 +1,5 @@
 package a6test.crisingc;
-// small chang
+// small change
 import a6.*;
 
 public class ROIObserverImpl implements ROIObserver {

@@ -1,5 +1,5 @@
 package a6test.crisingc;
-//small change
+//small changes
 import static org.junit.Assert.*;
 
 import a6.*;
