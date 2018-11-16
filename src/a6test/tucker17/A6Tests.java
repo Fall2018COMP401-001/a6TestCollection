@@ -25,13 +25,13 @@ public class A6Tests {
 	ROIObserver observer2 = new ROIObserverImpl();
 	ROIObserver observer3 = new ROIObserverImpl();
 
-	Region region2133 = new RegionImpl(2, 1, 3, 3);
-	Region region1122 = new RegionImpl(1, 1, 2, 2);
-	Region region2122 = new RegionImpl(2, 1, 2, 2);
-	Region region1133 = new RegionImpl(1, 1, 3, 3);
-	Region region3031 = new RegionImpl(3, 0, 3, 1);
-	Region region0000 = new RegionImpl(0, 0, 0, 0);
-	Region region0021 = new RegionImpl(0, 0, 2, 1);
+	A6Tests region2133 = new RegionImpl(2, 1, 3, 3);
+	A6Tests region1122 = new RegionImpl(1, 1, 2, 2);
+	A6Tests region2122 = new RegionImpl(2, 1, 2, 2);
+	A6Tests region1133 = new RegionImpl(1, 1, 3, 3);
+	A6Tests region3031 = new RegionImpl(3, 0, 3, 1);
+	A6Tests region0000 = new RegionImpl(0, 0, 0, 0);
+	A6Tests region0021 = new RegionImpl(0, 0, 2, 1);
 
 	@Test
 	public void registerObserverTest() {

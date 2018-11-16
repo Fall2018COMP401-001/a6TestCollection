@@ -5,7 +5,7 @@ public final class TestUtils {
 	private TestUtils() {
 	}
 
-	public static boolean regionEquals(Region a, Region b) {
+	public static boolean regionEquals(A6Tests a, A6Tests b) {
 		return a.getTop() == b.getTop() &&
 			a.getBottom() == b.getBottom() &&
 			a.getLeft() == b.getLeft() &&
