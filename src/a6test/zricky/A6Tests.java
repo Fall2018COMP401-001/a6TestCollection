@@ -2,7 +2,6 @@ package a6test.zricky;
 
 import static org.junit.jupiter.api.Assertions.*;
 import a6.*;
-
 import org.junit.jupiter.api.Test;
 
 
@@ -45,16 +44,16 @@ class A6Tests {
 	public void testIntersectMethod() {
 		boolean thrown = false;
 		Region region_X = new RegionImpl(2,2,3,3);
-		Region region_Y = new RegionImpl(7,7,5,5);
+		
 		try {
 			region_A.intersect(region_B);
-			assertTrue((region_A.intersect(region_B)).equals(region_X));
+			assertTrue(regEquals(region_A.intersect(region_B),(region_X)));
 		} catch (NoIntersectionException e){
 			throw new IllegalArgumentException("Intersection is expected");
 		}
 		try {
 			region_A.intersect(region_C);
-			assertTrue((region_A.intersect(region_C)).equals(region_A));
+			assertTrue(regEquals(region_A.intersect(region_C),(region_A)));
 		} catch (NoIntersectionException e){
 			throw new IllegalArgumentException("Intersection is expected");
 		}
@@ -72,9 +71,9 @@ class A6Tests {
 		Region region_X = new RegionImpl(1,1,5,5);
 		Region region_Y = new RegionImpl(2,2,9,9);
 		
-		assertTrue((region_A.union(region_B)).equals(region_X));
-		assertTrue((region_A.union(region_C)).equals(region_A));
-		assertTrue((region_A.union(region_D)).equals(region_Y));
+		assertTrue(regEquals((region_A.union(region_B)),(region_X)));
+		assertTrue(regEquals((region_A.union(region_C)),(region_A)));
+		assertTrue(regEquals((region_A.union(region_D)),(region_Y)));
 	}
 	
 	@Test 
@@ -90,12 +89,12 @@ class A6Tests {
 		picture_A.registerROIObserver(observer_A, region_A);
 		picture_A.registerROIObserver(observer_B, region_A);
 		ROIObserver[] listA = {observer_A, observer_B};
-		assertEquals(picture_A.findROIObservers(region_A), listA);
+		assertEquals((picture_A.findROIObservers(region_A))[0], listA[0]);
 		
 	}
 	
 	// helper method
-	public boolean equals(Region region_A, Region region_B) {
+	public boolean regEquals(Region region_A, Region region_B) {
 		if (region_A.getLeft() == region_B.getLeft() && 
 				region_A.getTop() == region_B.getTop() && 
 				region_A.getRight() == region_B.getRight() &&
