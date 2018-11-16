@@ -2,6 +2,8 @@ package a6test.crisingc;
 
 import static org.junit.Assert.*;
 
+import a6.*;
+
 import org.junit.Test;
 
 

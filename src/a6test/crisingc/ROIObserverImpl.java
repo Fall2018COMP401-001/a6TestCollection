@@ -1,5 +1,5 @@
 package a6test.crisingc;
-
+// small change
 public class ROIObserverImpl implements ROIObserver {
 	String caption;
 	
