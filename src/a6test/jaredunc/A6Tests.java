@@ -5,7 +5,7 @@ package a6test.jaredunc;
 
 public class A6Tests {
 	
-	public void testIntersect() throws NoIntersectionException {
+	public void Intersectiontestbasic() throws NoIntersectionException {
 		Region a = new RegionImpl(1, 1, 5, 6);
 		Region b = new RegionImpl(0, 0, 10, 10);
 
@@ -19,7 +19,7 @@ public class A6Tests {
 
 	}
 	
-	public void testUnion() {
+	public void Intersectiontestbasic() {
 		
 		Region a = new RegionImpl(1, 1, 5, 6);
 		Region b = new RegionImpl(0, 0, 2, 2);
