@@ -114,7 +114,7 @@ public class A6Tests {
 		assertEquals(1, observer03.getCount());
 		observer01.clearCount();
 		observer02.clearCount();
-		observer03.clearCount();
+		observer03.clearCount(); 
 		
 		mutable.paint(0, 0, 5, 5, yellow);
 		mutable.paint(1, 1, 2, 2, blue);
