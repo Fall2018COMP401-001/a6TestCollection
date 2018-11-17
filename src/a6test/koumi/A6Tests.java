@@ -72,15 +72,12 @@ public class A6Tests {
 	@Test
 	public void ROIObserverPaintTest() {
 		ObservablePicture observableMulticoloredPicture = new ObservablePictureImpl(multicoloredPicture);
-		ObservablePicture a = new ObservablePictureImpl(multicoloredPicture);
 		ObservablePicture b = new ObservablePictureImpl(multicoloredPicture);
 		ObservablePicture c = new ObservablePictureImpl(multicoloredPicture);
 		
 		observableMulticoloredPicture.paint(2, 3, blue);
 		colorCompare(observableMulticoloredPicture.getPixel(2, 3), blue);
 		
-		a.paint(0, 0, green, 0.5);
-		colorCompare(observableMulticoloredPicture.getPixel(0,0),new ColorPixel(1,0.5,0));
 		
 		b.paint(0, 0, 3, 3, blue);
 		colorCompare(observableMulticoloredPicture.getPixel(1, 1), blue);
@@ -105,29 +102,32 @@ public class A6Tests {
 		ROIObserver a = new ROIObserverImpl();
 		ROIObserver b = new ROIObserverImpl();
 		ROIObserver c = new ROIObserverImpl();
-		Region a1 = new RegionImpl(0,0,0,0);
+		Region a1 = new RegionImpl(0,0,1,1);
 		Region b1 = new RegionImpl(1,1,2,2);
 		Region c1 = new RegionImpl(2,0,3,2);
 		observableMonochromeRed.registerROIObserver(a, a1);
 		observableMonochromeRed.registerROIObserver(b, b1);
 		observableMonochromeRed.registerROIObserver(c, c1);
 		observableMonochromeRed.paint(0, 0, blue);
-		assertEquals(a.getCount(), 1);
+		assertEquals(1, a.getCount());
 		
 		observableMonochromeRed.suspendObservable();
 		observableMonochromeRed.paint(0,0,onerowBluepic);
 		observableMonochromeRed.paint(1,1,3,3,blue);
 		assertEquals(a.getCount(),1);
+		assertEquals(b.getCount(),0);
+		assertEquals(c.getCount(),0);
 		
 		observableMonochromeRed.resumeObservable();
-		assertEquals(a.getCount(),2);
-		assertEquals(b.getCount(),1);
-		assertEquals(c.getCount(),1);
+		assertEquals(2,a.getCount());
+		assertEquals(1,b.getCount());
+		assertEquals(1,c.getCount());
 		
 		
 	}
 	
 	// tests the intersection method
+	@Test
 	public void RegionImplIntersectionTest() {
 		Region a = new RegionImpl(0,0,1,1);
 		Region b = new RegionImpl(3,3,4,4);
@@ -152,6 +152,7 @@ public class A6Tests {
 		
 	}
 	// tests the union method
+	@Test
 	public void RegionImplUnionTest() {
 		Region a = new RegionImpl(0,0,1,1);
 		Region b = new RegionImpl(3,3,4,4);
