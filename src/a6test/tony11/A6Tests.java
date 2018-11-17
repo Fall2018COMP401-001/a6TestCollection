@@ -25,7 +25,7 @@ class A6Tests {
 			fail("invalid coords");
 		} catch (Exception e) {}
 		
-		//testing getters
+		//testing getters for r1
 		assertEquals(r1.getLeft(),0);
 		assertEquals(r1.getTop(),0);
 		assertEquals(r1.getRight(),3);
