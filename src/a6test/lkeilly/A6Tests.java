@@ -2,9 +2,9 @@ package a6test.lkeilly;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 import org.junit.Test;
 import a6.*;
 
@@ -105,7 +105,7 @@ public class A6Tests {
 		try {
 			ObservablePicture validPicture = new ObservablePictureImpl(randomImmutablePicture);
 		} catch (IllegalArgumentException e) {
-			fail("Picture cannot be null");
+			fail("Picture is not null");
 		}
 	}
 
@@ -181,101 +181,6 @@ public class A6Tests {
 			}
 		}
 
-	}
-
-	@Test
-	public void notifyObservableBasicTest() {
-
-		// ObservableImmutablePicture
-		ObservablePicture validImmutablePicture = new ObservablePictureImpl(randomImmutablePicture);
-
-		// Observers
-		ROIObserverImpl observer1 = new ROIObserverImpl();
-		ROIObserverImpl observer2 = new ROIObserverImpl();
-
-		// Registering observers with regions
-		validImmutablePicture.registerROIObserver(observer1, region1);
-		validImmutablePicture.registerROIObserver(observer1, region2);
-		validImmutablePicture.registerROIObserver(observer2, region1);
-		validImmutablePicture.registerROIObserver(observer2, region3);
-
-		// Modifying region (1,0)
-		validImmutablePicture.paint(1, 0, green);
-		assertEquals(2, observer1.getCount());
-		assertEquals(1, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
-
-		// Modifying region (3, 3)
-		validImmutablePicture.paint(3, 3, randomColor);
-		assertEquals(0, observer1.getCount());
-		assertEquals(1, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
-
-		// Modifying region from (0,0) to (3, 3)
-		validImmutablePicture.paint(0, 0, 3, 3, red);
-		assertEquals(2, observer1.getCount());
-		assertEquals(2, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
-
-	}
-
-	@Test
-	public void notifyObservableSuspendAndResumeTests() {
-
-		// ObservableImmutablePicture
-		ObservablePicture validImmutablePicture = new ObservablePictureImpl(randomImmutablePicture);
-
-		// Observers
-		ROIObserverImpl observer1 = new ROIObserverImpl();
-		ROIObserverImpl observer2 = new ROIObserverImpl();
-
-		// Registering observers with regions
-		validImmutablePicture.registerROIObserver(observer1, region1);
-		validImmutablePicture.registerROIObserver(observer1, region2);
-		validImmutablePicture.registerROIObserver(observer2, region1);
-		validImmutablePicture.registerROIObserver(observer2, region3);
-
-		// Painting region (1, 0)
-		validImmutablePicture.paint(1, 0, green);
-		assertEquals(2, observer1.getCount());
-		assertEquals(1, observer2.getCount());
-
-		// Painting region (2, 2)
-		validImmutablePicture.paint(2, 2, green);
-		assertEquals(4, observer1.getCount());
-		assertEquals(2, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
-
-		// Painting region (3, 3)
-		validImmutablePicture.paint(3, 3, green);
-		assertEquals(0, observer1.getCount());
-		assertEquals(1, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
-
-		// Suspending notifications
-		validImmutablePicture.suspendObservable();
-
-		// Painting region (1, 0)
-		validImmutablePicture.paint(1, 0, green);
-		assertEquals(0, observer1.getCount());
-		assertEquals(0, observer2.getCount());
-
-		// Painting region (2, 2)
-		validImmutablePicture.paint(2, 2, green);
-		assertEquals(0, observer1.getCount());
-		assertEquals(0, observer2.getCount());
-
-		// Resuming notifications
-		validImmutablePicture.resumeObservable();
-		assertEquals(2, observer1.getCount());
-		assertEquals(1, observer2.getCount());
-		observer1.clearCounter();
-		observer2.clearCounter();
 	}
 
 	private static boolean check_for_component_equality(Pixel a, Pixel b) {
