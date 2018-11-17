@@ -1,4 +1,4 @@
-package a6test.davidgri;
+ package a6test.davidgri;
 
 import static org.junit.Assert.assertEquals;
 
