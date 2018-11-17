@@ -8,7 +8,7 @@ class A6Tests {
 	Region a = new RegionImpl(5,7,5,7);
 	Region b = new RegionImpl(0,7,4,7);
 	Region c = new RegionImpl(5,4,7,0);
-	Region d = new RegionImpl(1,6,6,53;
+	Region d = new RegionImpl(1,6,6,5);
 	
 	@Test
 	public void regionIMplConstructorTests() {
