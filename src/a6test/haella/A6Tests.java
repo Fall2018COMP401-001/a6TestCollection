@@ -2,10 +2,10 @@ package a6test.haella;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import a6.*;
-
+import a6.*; 
+ 
 class A6Tests {
-	
+	 
 	private static Pixel RED = new ColorPixel(1.0, 0, 0);
 	private static Pixel GREEN = new ColorPixel(0, 1.0, 0);
 	private static Pixel BLUE = new ColorPixel(0, 0, 1.0);
@@ -60,86 +60,6 @@ class A6Tests {
 		
 		Picture painted_picture_immutable = multicolor_immutable_observable.paint(1, 1, small_red);
 		assertTrue(painted_picture_immutable == multicolor_immutable_observable);
-		
-	}
-	
-	@Test
-	public void ObservablePicturePaintAndNotifyTest() {
-		for (int x=0; x<multicolor_mutable.getWidth(); x++) {
-			for (int y=0; y<multicolor_mutable.getHeight(); y++) {
-				double fx = ((double) x) / ((double) (multicolor_mutable.getWidth()-1));
-				double fy = ((double) y) / ((double) (multicolor_mutable.getHeight()-1));
-				multicolor_mutable.paint(x, y, RED.blend(BLUE, fx).blend(GREEN, fy));
-			}
-		}
-		
-		ObservablePictureImpl multicolor_immutable_observable = new ObservablePictureImpl(multicolor_immutable);
-		ObservablePictureImpl multicolor_mutable_observable = new ObservablePictureImpl(multicolor_mutable);
-		
-		ROIObserver generic_roi_observer = new GenericROIObserver();
-		Region region_to_observe = new RegionImpl(1, 0, 3, 4);
-		
-		multicolor_immutable_observable.registerROIObserver(generic_roi_observer, region_to_observe);
-		multicolor_mutable_observable.registerROIObserver(generic_roi_observer, region_to_observe);
-		
-		multicolor_immutable_observable.paint(1, 1, GREEN);
-		assertEquals(multicolor_immutable_observable.getNotifyCount(), 1);
-		
-		
-		//paint using each paint method then check if notify count increases correctly
-		//one pixel paint
-		multicolor_mutable_observable.paint(1, 1, GREEN);
-		assertEquals(multicolor_mutable_observable.getNotifyCount(), 1);
-		multicolor_immutable_observable.paint(1, 1, GREEN);
-		assertEquals(multicolor_immutable_observable.getNotifyCount(), 1); //changed from 1 to 2 here
-		
-		//radius paint
-		multicolor_mutable_observable.paint(2, 2, 2.1, BLUE);
-		assertEquals(multicolor_mutable_observable.getNotifyCount(), 2);
-		multicolor_immutable_observable.paint(2, 2, 2.1, BLUE);
-		assertEquals(multicolor_immutable_observable.getNotifyCount(), 2);
-		
-		//rectangle paint
-		multicolor_mutable_observable.paint(1, 0, 4, 5, GREEN);
-		assertEquals(multicolor_mutable_observable.getNotifyCount(), 3);
-		multicolor_immutable_observable.paint(1, 0, 4, 5, GREEN);
-		assertEquals(multicolor_immutable_observable.getNotifyCount(), 3);
-		
-		//picture paint
-		multicolor_mutable_observable.paint(1, 1, small_red);
-		assertEquals(multicolor_mutable_observable.getNotifyCount(), 4);
-		multicolor_immutable_observable.paint(1, 1, small_red);
-		assertEquals(multicolor_immutable_observable.getNotifyCount(), 4);
-		
-		
-		//now paint stuff  out of bounds and see if it notifies
-		//one pixel paint
-				multicolor_mutable_observable.paint(5, 4, GREEN);
-				assertEquals(multicolor_mutable_observable.getNotifyCount(), 4);
-				multicolor_immutable_observable.paint(5, 4, GREEN);
-				assertEquals(multicolor_immutable_observable.getNotifyCount(), 4);
-				
-				//radius paint
-				multicolor_mutable_observable.paint(6, 4, 1.0, BLUE);
-				assertEquals(multicolor_mutable_observable.getNotifyCount(), 4);
-				multicolor_immutable_observable.paint(6, 4, 1.0, BLUE);
-				assertEquals(multicolor_immutable_observable.getNotifyCount(), 4);
-				
-				//rectangle paint
-				multicolor_mutable_observable.paint(4, 4, 6, 4, GREEN);
-				assertEquals(multicolor_mutable_observable.getNotifyCount(), 4);
-				multicolor_immutable_observable.paint(4, 4, 6, 4, GREEN);
-				assertEquals(multicolor_immutable_observable.getNotifyCount(), 4);
-				
-				//picture paint
-				multicolor_mutable_observable.paint(1, 1, smaller_red);
-				assertEquals(multicolor_mutable_observable.getNotifyCount(), 4);
-				multicolor_immutable_observable.paint(1, 1, smaller_red);
-				assertEquals(multicolor_immutable_observable.getNotifyCount(), 4);
-		
-		//so, when you get back, your ROI observer is only an interface, so you need to make some test child class for it
-		//multicolor_immutable_observable.registerROIObserver(, new RegionImpl(1, 1, 4, 3));
-		
 		
 	}
 	
@@ -361,5 +281,3 @@ class A6Tests {
 	}
 
 }
-
-
