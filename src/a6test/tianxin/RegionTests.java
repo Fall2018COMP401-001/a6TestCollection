@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Test;
 
-class A6Tests {
+class RegionTests {
 	Region a = new RegionImpl(5,7,5,7);
 	Region b = new RegionImpl(0,7,4,7);
 	Region c = new RegionImpl(5,4,7,0);
