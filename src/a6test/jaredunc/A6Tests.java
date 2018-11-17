@@ -104,5 +104,68 @@ public class A6Tests {
 		
 	}
 	
+	public void testpaint() {
+		
+		Region a = new RegionImpl(0,1,0,1);
+		Region b = new RegionImpl(0,0,4,4);
+		Region c = new RegionImpl(4,4,5,6);
+		Region d = new RegionImpl(0,0,3,3);
+		Region e = new RegionImpl(8,8,8,9);
+		Region f = new RegionImpl(0,0,3,3);
+		ROIObserver w = new ROIObserverI();
+		ROIObserver x = new ROIObserverI();
+		ROIObserver y = new ROIObserverI();
+		ROIObserver z = new ROIObserverI();
+
+		
+		
+		Pixel[][] pixels = new Pixel[10][10];
+		
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels.length; j++) {
+				pixels[i][j] = new ColorPixel(Math.random(), Math.random(), Math.random());
+			}
+		}
+		
+		Picture picture = new ImmutablePixelArrayPicture(pixels, "Array");
+		
+		Pixel[][] pixels2 = new Pixel[10][10];
+		
+		for (int i = 0; i < pixels2.length; i++) {
+			for (int j = 0; j < pixels2.length; j++) {
+				pixels[i][j] = new ColorPixel(Math.random(), Math.random(), Math.random());
+			}
+		}
+		
+		
+		ObservablePicture O = new ObservablePictureImpl(picture);
+		
+		ROIObserver sigma = new ROIObserverExtensionImpl();
+		
+		O.registerROIObserver(w,a);
+		O.registerROIObserver(x,a);
+		O.registerROIObserver(y,c);
+		O.registerROIObserver(z,e);
+		O.registerROIObserver(w,d);
+		O.registerROIObserver(x,f);
+		O.registerROIObserver(y,e);
+		O.registerROIObserver(z,a);
+		Pixel rando = new ColorPixel(Math.random(), Math.random(), Math.random());
+		O.suspendObservable();
+		O.paint(0,0,rando);
+		ROIObserver[] listy = O.findROIObservers(new RegionImpl(0,0,10,10));
+		assertEquals(listy[0].getNotify(),0);
+		assertEquals(listy[1].getNotify(),0);
+		assertEquals(listy[2].getNotify(),0);
+		assertEquals(listy[3].getNotify(),0);
+		assertEquals(listy[4].getNotify(),1);
+		assertEquals(listy[5].getNotify(),1);
+		assertEquals(listy[6].getNotify(),0);
+		assertEquals(listy[7].getNotify(),0);
+		
+		
+		
+	}
+	
 	
 }
