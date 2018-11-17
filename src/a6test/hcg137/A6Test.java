@@ -1,4 +1,4 @@
-package a6tests;
+package a6test.hcg137;
 
 import static org.junit.Assert.*;
 
@@ -157,3 +157,6 @@ public class A6Test {
 
 	}
 	}
+
+
+
