@@ -2,7 +2,6 @@ package a6test.tianxin;
 
 import a6.NoIntersectionException;
 
- 
 public class RegionImpl implements Region {
 	private int top_y;
 	private int bottom_y;
