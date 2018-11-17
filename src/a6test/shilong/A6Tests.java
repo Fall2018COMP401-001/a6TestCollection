@@ -210,7 +210,7 @@ public class A6Tests {
 	@Test
 	public void testPictureRegionWholeIntersect() {
 		ObservablePicture pic = TestUtils.getObservablePicture(500, 500);
-		Region matchRegion = new RegionImpl(10, 5, 40, 30);
+		Region matchRegion = new RegionImpl(10, 5, 39, 29);
 		Region registeredRegion = new RegionImpl(0, 0, 100, 100);
 		Picture pictureRegion = new MutablePixelArrayPicture(TestUtils.randColorRectangle(30, 25),
 			"Cyka Blyat");
