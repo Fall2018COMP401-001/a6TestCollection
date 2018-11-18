@@ -23,12 +23,12 @@ class A6Tests {
     	
     }
 	
-	@Test
+	@Test 
 	public void testUnion () {
 		assertEquals(r3456.union(r1234).getBottom(),6);
 		assertEquals(r3456.union(r1234).getLeft(),1);
 		assertEquals(r3456.union(r1234).getRight(),5);	
-	}
+	} 
 	
 	@Test
 	public void testIntersect() throws NoIntersectionException {
