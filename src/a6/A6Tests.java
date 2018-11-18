@@ -1,12 +1,10 @@
-package a6test.yuqingye;
+package a6;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-import a6.*;
-
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
+import a6.NoIntersectionException;
+import a6.RegionImpl;
 
 
 class A6Tests {
@@ -39,5 +37,8 @@ class A6Tests {
         
 
 	}
-
+	
+	
+	
+  
 }
